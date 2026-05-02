@@ -1,0 +1,44 @@
+<body>
+
+<div class="navbar">
+    <h2>Resume Builder</h2>
+</div>
+
+<div class="center-box">
+    <h2>Welcome</h2>
+
+    <input id="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
+
+    <button onclick="login()">Login</button>
+    <button onclick="register()">Register</button>
+</div>
+
+<script>
+function register() {
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    users.push({
+        email: email.value,
+        password: password.value
+    });
+
+    localStorage.setItem("users", JSON.stringify(users));
+    alert("Registered!");
+}
+
+function login() {
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    let user = users.find(u => u.email === email.value && u.password === password.value);
+
+    if (user) {
+        localStorage.setItem("loggedInUser", email.value);
+        window.location = "dashboard.html";
+    } else {
+        alert("Invalid login");
+    }
+}
+</script>
+
+</body>
